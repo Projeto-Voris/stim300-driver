@@ -1,5 +1,5 @@
 
-#include "serial_unix.h"
+#include "stim300_driver/serial_unix.hpp"
 #include <iostream>
 // Everything is learned from
 // https://en.wikibooks.org/wiki/Serial_Programming/termios

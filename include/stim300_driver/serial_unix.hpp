@@ -1,13 +1,13 @@
 #ifndef DRIVER_STIM300_SERIAL_UBUNTU_H
 #define DRIVER_STIM300_SERIAL_UBUNTU_H
 
-#include "serial_driver.h"
+#include "serial_driver.hpp"
 #include <fcntl.h>
 #include <string>
 #include <termios.h>
 #include <unistd.h>
 
-#include "stim300_constants.h"
+#include "stim300_constants.hpp"
 #include <cstring>
 #include <stdexcept>
 #include <stdint.h>

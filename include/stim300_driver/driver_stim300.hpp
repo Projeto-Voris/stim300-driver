@@ -2,9 +2,9 @@
 #ifndef DRIVER_STIM300_DRIVER_STIM300_H
 #define DRIVER_STIM300_DRIVER_STIM300_H
 
-#include "../src/datagram_parser.h"
-#include "../src/serial_unix.h"
-#include "../src/stim300_constants.h"
+#include "datagram_parser.hpp"
+#include "serial_unix.hpp"
+#include "stim300_constants.hpp"
 #include <boost/crc.hpp>
 #include <vector>
 

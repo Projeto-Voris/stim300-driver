@@ -1,4 +1,4 @@
-#include "../src/stim300_constants.h"
+#include "stim300_driver/stim300_constants.hpp"
 #include <gtest/gtest.h>
 #include <vector>
 

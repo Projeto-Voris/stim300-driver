@@ -2,8 +2,8 @@
 #ifndef DRIVER_STIM300_MOCK_SERIAL_DRIVER_H
 #define DRIVER_STIM300_MOCK_SERIAL_DRIVER_H
 
-#include "../src/serial_unix.h"
-#include "../src/stim300_constants.h"
+#include "stim300_driver/serial_unix.hpp"
+#include "stim300_driver/stim300_constants.hpp"
 #include "gmock/gmock.h"
 #include <boost/crc.hpp>
 

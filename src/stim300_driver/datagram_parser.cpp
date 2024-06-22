@@ -1,5 +1,4 @@
-
-#include "datagram_parser.h"
+#include "stim300_driver/datagram_parser.hpp"
 
 using namespace stim_const;
 using namespace stim_300;

@@ -1,5 +1,5 @@
 
-#include "driver_stim300.h"
+#include "stim300_driver/driver_stim300.hpp"
 #include <iostream>
 
 DriverStim300::DriverStim300(SerialDriver &serial_driver,

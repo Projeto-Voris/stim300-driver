@@ -1,5 +1,5 @@
 
-#include "../include/driver_stim300.h"
+#include "stim300_driver/driver_stim300.hpp"
 #include "mock_serial_driver.h"
 #include "gmock/gmock.h"
 

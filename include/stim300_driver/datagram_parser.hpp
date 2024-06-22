@@ -2,12 +2,13 @@
 #ifndef DRIVER_STIM300_DATAGRAM_PARSER_H
 #define DRIVER_STIM300_DATAGRAM_PARSER_H
 
-#include "stim300_constants.h"
+#include "stim300_constants.hpp"
 #include <array>
 #include <cassert>
 #include <cstdint>
 #include <sstream>
 #include <vector>
+
 using namespace stim_const;
 
 namespace stim_300 {
