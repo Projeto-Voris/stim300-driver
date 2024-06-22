@@ -28,7 +28,7 @@ def generate_launch_description():
         ),
         Node(
             package='driver_stim300',
-            executable='stim300_driver_node',
+            executable='ros_stim300_driver_node',
             name='stim300driver',
             parameters=[{
                 'device_name': LaunchConfiguration('device_name'),
