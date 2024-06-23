@@ -15,7 +15,7 @@ target_sources(
 target_include_directories(
     ${DRIVER_LIB}
     PUBLIC
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../../include>
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../../include/${PROJECT_NAME}>
     $<INSTALL_INTERFACE:include/${PROJECT_NAME}>
 )
 

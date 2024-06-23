@@ -2,23 +2,18 @@
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
     <name>driver_stim300</name>
-    <version>0.0.0</version>
+    <version>0.0.1</version>
     <description>The drivers-imu_stim300 package</description>
-
-
     <maintainer email="andrevaa@stud.ntnu.no">vortex</maintainer>
 
     <license>MIT</license>
 
-    <buildtool_depend>colcon</buildtool_depend>
-    <build_depend>roscpp</build_depend>
-    <build_depend>sensor_msgs</build_depend>
-    <build_depend>std_srvs</build_depend>
-    <build_export_depend>roscpp</build_export_depend>
-    <build_export_depend>sensor_msgs</build_export_depend>
-    <build_export_depend>std_srvs</build_export_depend>	
-    <exec_depend>roscpp</exec_depend>
-    <exec_depend>sensor_msgs</exec_depend>
-    <exec_depend>std_srvs</exec_depend>
+    <buildtool_depend>ament_cmake</buildtool_depend>
+    <depend>roscpp</depend>
+    <depend>sensor_msgs</depend>
+    <depend>std_srvs</depend>
+    <export>
+    <build_type>ament_cmake</build_type>
+    </export>
 
 </package>

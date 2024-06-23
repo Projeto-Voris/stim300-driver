@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.5)
 project(driver_stim300)
 
 if(NOT CMAKE_CXX_STANDARD)
-  set(CMAKE_CXX_STANDARD 17)
+  set(CMAKE_CXX_STANDARD 20)
 endif()
 
 find_package(ament_cmake REQUIRED)
@@ -19,7 +19,7 @@ install(TARGETS
 )
 
 install(
-  DIRECTORY include/
+  DIRECTORY include/${PROJECT_NAME}
   DESTINATION include/${PROJECT_NAME}
 )
 install(

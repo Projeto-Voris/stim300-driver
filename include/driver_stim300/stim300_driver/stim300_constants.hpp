@@ -82,6 +82,8 @@ static constexpr uint16_t sampleFreq2int(const SampleFreq &sample_freq) {
     return 2000;
   case SampleFreq::TRG:
     return 0;
+  default:
+    return 0;
   }
 }
 
@@ -169,49 +171,53 @@ static constexpr std::array<DatagramInfo, 18>
     }};
 
 constexpr uint8_t datagramIdentifierToRaw(DatagramIdentifier d_id) {
-  for (int i = 0; i < datagram_info_map.size(); ++i) {
-    if (datagram_info_map[i].id == d_id) {
-      return datagram_info_map[i].raw_id;
+  for (size_t i = 0; i < datagram_info_map.size(); ++i) {
+    if (datagram_info_map.at(i).id == d_id) {
+      return datagram_info_map.at(i).raw_id;
     }
   }
+  return 0; // TODO: Error handling
+
 }
 
 constexpr DatagramIdentifier rawToDatagramIdentifier(uint8_t datagram_id) {
-  for (int i = 0; i < datagram_info_map.size(); ++i) {
-    if (datagram_info_map[i].raw_id == datagram_id) {
-      return datagram_info_map[i].id;
+  for (size_t i = 0; i < datagram_info_map.size(); ++i) {
+    if (datagram_info_map.at(i).raw_id == datagram_id) {
+      return datagram_info_map.at(i).id;
     }
   }
-  return DatagramIdentifier::CONFIGURATION_CRLF; // Todo: implement error
-                                                 // handeling
+  return DatagramIdentifier::CONFIGURATION_CRLF; // TODO: Error handling
 };
 
 constexpr uint8_t numberOfPaddingBytes(DatagramIdentifier datagram_identifier) {
-  for (int i = 0; i < datagram_info_map.size(); ++i) {
-    if (datagram_info_map[i].id == datagram_identifier) {
-      return datagram_info_map[i].number_of_padding_bytes;
+  for (size_t i = 0; i < datagram_info_map.size(); ++i) {
+    if (datagram_info_map.at(i).id == datagram_identifier) {
+      return datagram_info_map.at(i).number_of_padding_bytes;
     }
   }
+  return 0; // TODO: Error handling
 }
 
 constexpr std::array<bool, 5>
 isIncluded(DatagramIdentifier datagram_identifier) {
-  for (int i = 0; i < datagram_info_map.size(); ++i) {
-    if (datagram_info_map[i].id == datagram_identifier) {
-      return datagram_info_map[i].included_sensors;
+  for (size_t i = 0; i < datagram_info_map.size(); ++i) {
+    if (datagram_info_map.at(i).id == datagram_identifier) {
+      return datagram_info_map.at(i).included_sensors;
     }
   }
+  return {}; // TODO: Error handling
 }
 
 static DatagramIdentifier toDatagramID(std::array<bool, 5> isIncluded) {
-  for (int i = 0; i < datagram_info_map.size(); ++i) {
-    if (datagram_info_map[i].included_sensors == isIncluded) {
-      return datagram_info_map[i].id;
+  for (size_t i = 0; i < datagram_info_map.size(); ++i) {
+    if (datagram_info_map.at(i).included_sensors == isIncluded) {
+      return datagram_info_map.at(i).id;
     }
   }
+  return DatagramIdentifier::CONFIGURATION_CRLF; // TODO: Error handling
 }
 
-static const uint8_t
+static uint8_t
 calculateDatagramSize(DatagramIdentifier datagram_identifier) {
   if (datagram_identifier == DatagramIdentifier::CONFIGURATION or
       datagram_identifier == DatagramIdentifier::CONFIGURATION_CRLF) {
@@ -252,6 +258,8 @@ static constexpr double accScale(AccRange acc_range) {
     return 1.0 / powerOf2(18);
   case AccRange::G80:
     return 1.0 / powerOf2(16);
+  default:
+    return 0;
   }
 }
 
@@ -267,6 +275,8 @@ static constexpr double accIncrScale(AccRange acc_range) {
     return 1.0 / powerOf2(21);
   case AccRange::G80:
     return 1.0 / powerOf2(19);
+  default:
+    return 0;
   }
 }
 

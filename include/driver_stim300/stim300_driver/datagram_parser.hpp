@@ -91,6 +91,8 @@ private:
     } else if (size == 2) {
       return ((*it++ << 24) | (*it++ << 16)) >> 16;
     }
+
+    return 0;
   }
 };
 } // end namespace stim_300

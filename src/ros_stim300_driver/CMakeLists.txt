@@ -19,18 +19,18 @@ ament_target_dependencies(
     std_srvs
 )
 
-
-target_include_directories(
-    ${ROS_DRIVER_LIB}
-    PUBLIC
-    $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/include>
-)
-
 target_link_libraries(
   ${ROS_DRIVER_LIB}
   PUBLIC
   stim300_driver_lib
 )
+
+target_include_directories(
+    ${ROS_DRIVER_LIB}
+    PUBLIC
+    $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/include/${PROJECT_NAME}>
+)
+
 
 install(TARGETS
     ${ROS_DRIVER_LIB}
@@ -48,7 +48,7 @@ add_executable(
 target_include_directories(
   ${STIM300_DRIVER_BINARY_NAME}
   PUBLIC
-  $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/include>
+  $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/include/${PROJECT_NAME}>
 )
 
 target_link_libraries(

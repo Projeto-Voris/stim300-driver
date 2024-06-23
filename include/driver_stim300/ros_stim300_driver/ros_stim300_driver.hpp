@@ -11,16 +11,6 @@
 #include <vector>
 
 constexpr int NUMBER_OF_CALIBRATION_SAMPLES{100};
-constexpr double ACC_TOLERANCE{0.1};
-constexpr double MAX_DROPPED_ACC_X_MSG{5};
-constexpr double MAX_DROPPED_ACC_Y_MSG{5};
-constexpr double MAX_DROPPED_ACC_Z_MSG{5};
-constexpr double MAX_DROPPED_GYRO_X_MSG{5};
-constexpr double MAX_DROPPED_GYRO_Y_MSG{5};
-constexpr double MAX_DROPPED_GYRO_Z_MSG{5};
-constexpr double GYRO_X_PEAK_TO_PEAK_NOISE{0.0002};
-constexpr double GYRO_Y_PEAK_TO_PEAK_NOISE{0.0002};
-constexpr double GYRO_Z_PEAK_TO_PEAK_NOISE{0.0002};
 
 struct Quaternion {
   double w, x, y, z;
@@ -30,14 +20,26 @@ struct EulerAngles {
   double roll, pitch, yaw;
 };
 
+struct CalibrationData
+{
+  double inclination_x_sum{};
+  double inclination_y_sum{};
+  double inclination_z_sum{};
+  int n_samples{};
+};
+
+
 Quaternion
-FromRPYToQuaternion(EulerAngles angles); // yaw (Z), pitch (Y), roll (X)
+fromRPYToQuaternion(EulerAngles angles); // yaw (Z), pitch (Y), roll (X)
 
 class Stim300DriverNode : public rclcpp::Node {
 public:
   Stim300DriverNode();
 
 private:
+  void calibrateSensor(const int inc_x, const int inc_y, const int inc_z);
+  void processNewMeasurement();
+  void setupTimedCallback();
   void timerCallback();
 
   bool responseCalibrateIMU(
@@ -48,13 +50,15 @@ private:
   rclcpp::Service<std_srvs::srv::Trigger>::SharedPtr calibration_service_;
   rclcpp::TimerBase::SharedPtr timer_;
 
-  bool calibration_mode_ = false;
+  bool calibration_mode_{false};
+  CalibrationData calibrationData_{};
 
-  std::string device_name_;
-  double variance_gyro_;
-  double variance_acc_;
-  double gravity_;
-  double sample_rate_;
+
+  std::string device_name_{};
+  double variance_gyro_{};
+  double variance_acc_{};
+  double gravity_{};
+  int sample_rate_{};
 
   sensor_msgs::msg::Imu stim300msg_;
 
