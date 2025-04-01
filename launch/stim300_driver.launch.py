@@ -26,10 +26,16 @@ def generate_launch_description():
             default_value='125',
             description='Sample rate'
         ),
+        DeclareLaunchArgument(
+            'namespace',
+            default_value='SM2',
+            description='Namespace of node'
+        ),
         Node(
             package='driver_stim300',
             executable='ros_stim300_driver_node',
             name='stim300driver',
+            namespace=LaunchConfiguration('namespace'),
             parameters=[{
                 'device_name': LaunchConfiguration('device_name'),
                 'standard_deviation_of_gyro': LaunchConfiguration('standard_deviation_of_gyro'),
