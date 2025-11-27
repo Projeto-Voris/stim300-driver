@@ -26,12 +26,14 @@ Stim300DriverNode::Stim300DriverNode()
   this->declare_parameter<double>("variance_acc", 0.000055);
   this->declare_parameter<int>("sample_rate", 125);
   this->declare_parameter<double>("gravity", 9.80665);
+  this->declare_parameter<std::string>("frame_id", "imu");
 
   this->get_parameter("device_name", device_name_);
   this->get_parameter("variance_gyro", variance_gyro_);
   this->get_parameter("variance_acc", variance_acc_);
   this->get_parameter("sample_rate", sample_rate_);
   this->get_parameter("gravity", gravity_);
+
 
   imu_publisher_ =
       this->create_publisher<sensor_msgs::msg::Imu>("imu/data_raw", 1000);
@@ -49,7 +51,7 @@ Stim300DriverNode::Stim300DriverNode()
   stim300msg_.orientation.x = 0.00000024358;
   stim300msg_.orientation.y = 0.00000024358;
   stim300msg_.orientation.z = 0.00000024358;
-  stim300msg_.header.frame_id = "imu_0";
+  stim300msg_.header.frame_id = this->get_parameter("frame_id").as_string();
 
   serial_driver_ = std::make_unique<SerialUnix>(
       device_name_, stim_const::BaudRate::BAUD_921600);
